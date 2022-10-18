@@ -2,7 +2,7 @@ import http from 'k6/http';
 import { Rate } from 'k6/metrics';
 import { check } from 'k6';
 
-const failures = new Rate('failed requests');
+const failures = new Rate('failed_requests');
 
 export const options = {
   vus: 10,
@@ -14,7 +14,7 @@ export const options = {
 }
 
 export default function() {
-  const result = http.get('https://test-api.k6.io/');
+  const result = http.get('https://reqres.in/api/users?page=2');
   check(result, {
     'http response status code is 200': r => r.status === 200,
   });
